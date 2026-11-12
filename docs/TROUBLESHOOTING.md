@@ -15,6 +15,7 @@ Start with `python -m jainam_mcp doctor`. To test broker connectivity explicitly
 | `RATE_LIMITED` | Stop repeated requests and retry later according to broker guidance |
 | `NETWORK_ERROR` | Check internet, Jainam availability and certificates; no DNS/IP patches are installed |
 | No candles | Verify current token, exchange, resolution, millisecond timestamps and broker data availability |
+| Instrument search returns `BROKER_ERROR` | The broker may be returning a web/login page or unusable CSV. Confirm a valid session, entitlement and current endpoint with Jainam; this is not an empty-symbol result |
 | No instrument matches | Use a shorter query and correct exchange; contract masters change |
 | POSIX permission error | Run `chmod 600` on your private credentials file, not on a shared directory |
 | Server is silent in Terminal | Normal for stdio MCP: the AI client must launch it; Ctrl+C exits |

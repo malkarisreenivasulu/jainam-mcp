@@ -21,7 +21,7 @@ If `python` is not found on macOS/Linux, try `python3`. On Windows try `py -3`. 
 ## 2. Download the released source
 
 ```sh
-git clone --branch v0.1.1 https://github.com/malkarisreenivasulu/jainam-mcp-agent.git
+git clone --branch v0.1.2 https://github.com/malkarisreenivasulu/jainam-mcp-agent.git
 cd jainam-mcp-agent
 ```
 

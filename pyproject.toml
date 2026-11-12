@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "jainam-mcp-agent"
-version = "0.1.1"
+version = "0.1.2"
 description = "Local read-only MCP server for Jainam ProTrade Open API v2"
 readme = "README.md"
 requires-python = ">=3.11"

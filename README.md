@@ -45,7 +45,7 @@ The MCP server reads data; your AI client renders charts if supported. Sector ch
 If you already have Python and Git, these commands install the tagged release in an isolated folder:
 
 ```sh
-git clone --branch v0.1.1 https://github.com/malkarisreenivasulu/jainam-mcp-agent.git
+git clone --branch v0.1.2 https://github.com/malkarisreenivasulu/jainam-mcp-agent.git
 cd jainam-mcp-agent
 python3 -m venv .venv
 # macOS/Linux:
@@ -67,6 +67,16 @@ python -m jainam_mcp client-config vscode
 
 The output contains a local executable path and launch arguments, **not credentials**. Merge it into your client's configuration using its guide. ChatGPT does not use this desktop JSON; follow its separate tunnel guide.
 
+## Verification before you use real account data
+
+See the [validation report](docs/VALIDATION.md) for exactly what is tested.
+The suite covers all ten tools over MCP with synthetic broker responses, and CI
+installs the built wheel in fresh environments across Windows, macOS and Linux.
+These checks do **not** prove real Jainam login, API entitlement, production data
+schemas or a particular client's chart rendering. Run `doctor --online` and verify
+a small real read with your own account after setup. A broker HTML error page is
+reported as an error, never a successful empty instrument search.
+
 ## Privacy and limitations
 
 Credentials stay in your local environment or private credentials file. This repository contains no maintainer account credentials. The server never returns the configured session token, redacts common identifiers and secret fields, and does not print raw broker errors. Account balances, holdings and trades **are sent to your chosen AI client when you request them**; they may be processed by that client's provider. Review its privacy settings. Local execution does not mean all data stays offline.
@@ -79,6 +89,7 @@ You need your own Jainam account, developer application, API entitlement and val
 - [Claude Desktop](docs/CLAUDE.md) · [VS Code](docs/VSCODE.md) · [ChatGPT](docs/CHATGPT.md)
 - [Visual example prompts](docs/EXAMPLE_PROMPTS.md)
 - [Tools and response formats](docs/TOOLS.md)
+- [Testing and validation limits](docs/VALIDATION.md)
 - [Troubleshooting](docs/TROUBLESHOOTING.md)
 - [Security policy](SECURITY.md) · [Contributing](CONTRIBUTING.md) · [Changelog](CHANGELOG.md)
 

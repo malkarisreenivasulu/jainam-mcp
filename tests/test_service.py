@@ -140,6 +140,7 @@ def test_master_search_bounds_and_token_normalization(monkeypatch):
 
     class Download:
         status_code = 200
+        headers = {"Content-Type": "text/csv"}
 
         def __enter__(self):
             return self
@@ -152,6 +153,7 @@ def test_master_search_bounds_and_token_normalization(monkeypatch):
 
     def send(self, method, url, **kw):
         assert method == "GET" and url.endswith("/contract/MCX.csv")
+        assert kw["headers"]["token"] == CREDS.user_session
         assert kw["allow_redirects"] is False
         return Download()
 
@@ -184,3 +186,35 @@ def test_read_allowlist_has_no_mutation_paths():
         for _, path in READ_ROUTES
     )
     assert Client is not None
+
+
+@pytest.mark.parametrize(
+    "body,content_type",
+    [
+        (b"<!doctype html><html>Login</html>", "text/html"),
+        (b"<html>Login</html>", "text/plain"),
+        (b"", "text/csv"),
+        (b"Unexpected single column", "text/csv"),
+    ],
+)
+def test_unusable_master_is_broker_failure_not_empty_success(monkeypatch, body, content_type):
+    r = requests.Response()
+    r.status_code = 200
+    r.headers["Content-Type"] = content_type
+    r._content = body
+    r._content_consumed = True
+    monkeypatch.setattr(requests.Session, "request", lambda *a, **kw: r)
+    result = Service(CREDS).search_contracts("NSE", "TEST", 5)
+    assert result["ok"] is False
+    assert result["error"] == "BROKER_ERROR"
+    assert "matches" not in str(result)
+
+
+def test_redirect_json_cannot_be_reported_as_success(monkeypatch):
+    r = response({"status": "ok", "data": {"userSession": CREDS.user_session}}, 302)
+    r._content_consumed = True
+    monkeypatch.setattr(requests.Session, "request", lambda *a, **kw: r)
+    result = Service(CREDS).account("funds")
+    assert result["error"] == "BROKER_ERROR"
+    assert result["http_status"] == 302
+    assert CREDS.user_session not in str(result)

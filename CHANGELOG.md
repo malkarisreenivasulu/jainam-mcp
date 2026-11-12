@@ -1,5 +1,15 @@
 # Changelog
 
+## 0.1.2 — 2026-11-12
+
+- Reject HTML, empty and unusable contract-master responses instead of reporting misleading empty matches.
+- Include configured SDK session headers on contract reads; authenticated production access remains unverified without an account.
+- Reject redirect responses as broker failures while continuing to disable redirect following.
+- Correct online doctor output to indicate that a connection was attempted.
+- Add configured-protocol coverage for all ten tools using synthetic network responses.
+- Add fresh-wheel installation and generated-client-command smoke checks to every OS/Python CI combination.
+- Publish an explicit validation report separating automated checks from real-account and AI-client UI validation.
+
 ## 0.1.1 — 2026-11-12
 
 - Rename the public project/package to Jainam MCP Agent (`jainam-mcp-agent`).

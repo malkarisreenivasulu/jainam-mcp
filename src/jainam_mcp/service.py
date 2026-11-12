@@ -79,7 +79,11 @@ class ReadOnlySession(requests.Session):
         ):
             raise PermissionError("Request is outside the read-only API allowlist.")
         kwargs["allow_redirects"] = False
-        return super().request(method, url, **kwargs)
+        response = super().request(method, url, **kwargs)
+        if 300 <= response.status_code < 400:
+            response.close()
+            raise APIError("Unexpected broker redirect", response.status_code)
+        return response
 
 
 def sanitize(value, secrets: tuple[str, ...]):
@@ -213,7 +217,9 @@ class Service:
 
         def operation(client):
             # Keep downloads in memory and bounded. No model-supplied paths or URLs.
-            with client.session.get(client.contract_url(exchange), timeout=20, stream=True) as response:
+            with client.session.get(
+                client.contract_url(exchange), headers=client.headers, timeout=20, stream=True
+            ) as response:
                 if response.status_code != 200:
                     raise APIError("Contract download failed", response.status_code)
                 chunks, size = [], 0
@@ -223,9 +229,15 @@ class Service:
                         raise ValueError("Contract master exceeds limit")
                     chunks.append(chunk)
                 text = b"".join(chunks).decode("utf-8-sig")
+                if "text/html" in response.headers.get(
+                    "Content-Type", ""
+                ).lower() or text.lstrip().startswith("<"):
+                    raise APIError(
+                        "Broker returned a web page instead of contract data", response.status_code
+                    )
                 rows = csv.DictReader(io.StringIO(text))
-                if not rows.fieldnames:
-                    raise ValueError("No contract columns")
+                if not rows.fieldnames or len(rows.fieldnames) < 2:
+                    raise APIError("Broker did not return a usable contract CSV", response.status_code)
                 matches = []
                 for row in rows:
                     if query.casefold() in " ".join(str(v) for v in row.values()).casefold():

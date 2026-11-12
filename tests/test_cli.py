@@ -112,3 +112,16 @@ def test_public_name_and_legacy_entry_points_remain_compatible():
     from jainam_mcp.config import default_path
 
     assert default_path().parent.name == "jainam-mcp"
+
+
+def test_online_doctor_marks_connection_attempt_without_financial_output(tmp_path, monkeypatch, capsys):
+    from jainam_mcp.config import Credentials, save
+
+    path = tmp_path / "credentials.json"
+    save(Credentials("synthetic-user", "synthetic-session-not-real"), path)
+    monkeypatch.setattr(cli.Service, "account", lambda *a, **kw: {"ok": True, "data": {"funds": 12345}})
+    assert cli.main(["--config", str(path), "doctor", "--online"]) == 0
+    report = json.loads(capsys.readouterr().out)
+    assert report["connection_tested"] is True
+    assert report["online_ok"] is True
+    assert "12345" not in str(report)

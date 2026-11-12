@@ -107,6 +107,7 @@ def main(argv: list[str] | None = None) -> int:
             report = service.status()
             report["credentials_file_present"] = (path or default_path()).exists()
             if args.online:
+                report["connection_tested"] = True
                 result = service.account("funds")
                 report["online_ok"] = result["ok"]
                 if not result["ok"]:

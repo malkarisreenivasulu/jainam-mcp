@@ -7,6 +7,7 @@ python -m pip install -e '.[dev]'
 python -m pytest
 python -m ruff check .
 python -m build
+python scripts/smoke_install.py dist/*-py3-none-any.whl
 python scripts/scan_secrets.py
 ```
 
