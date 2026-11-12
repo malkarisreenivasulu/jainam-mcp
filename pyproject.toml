@@ -12,7 +12,7 @@ license = "MIT"
 license-files = ["LICENSE"]
 authors = [{name = "Sreenivasulu Malkari"}]
 dependencies = [
-  "mcp>=1.30,<2",
+  "mcp>=1.30,<3",
   "jainam-api-python @ git+https://github.com/malkarisreenivasulu/jainam-api-python.git@393d522623dfec875d7a39959c40c0fdd17ff082",
 ]
 classifiers = ["Programming Language :: Python :: 3", "Programming Language :: Python :: 3 :: Only"]
