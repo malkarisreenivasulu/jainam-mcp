@@ -59,7 +59,7 @@ def configuration(client: str, config_path: Path | None = None) -> dict:
 
 
 def main(argv: list[str] | None = None) -> int:
-    parser = argparse.ArgumentParser(description="Local read-only Jainam MCP server")
+    parser = argparse.ArgumentParser(description="Local read-only Jainam MCP Agent server")
     parser.add_argument("--version", action="version", version=__version__)
     parser.add_argument("--config", type=Path, help="Explicit local credentials file (before subcommand)")
     sub = parser.add_subparsers(dest="command", required=True)

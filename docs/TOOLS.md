@@ -36,3 +36,16 @@ Failure:
 Other errors include `NOT_CONFIGURED`, `RATE_LIMITED`, `NETWORK_ERROR`, `INVALID_REQUEST`, `RESPONSE_TOO_LARGE`, `BROKER_ERROR`, and `INTERNAL_ERROR`. MCP schema validation can reject malformed inputs before the service runs. Error messages deliberately omit raw broker exception text and response bodies. HTTP 200 responses marked as errors by the SDK are also failures, but session expiry in that shape may appear as `BROKER_ERROR`; renew the session and check Jainam's guidance.
 
 Balances, holdings, orders and P&L fields are broker data, not computed predictions. Currency, units, timestamps and realized/unrealized definitions follow the response; do not invent missing values. Tool responses can contain private financial information despite credential redaction.
+
+
+## Analysis prompts and charts
+
+Five MCP prompt templates are available separately from the ten read-only tools:
+`holdings_dashboard`, `positions_review`, `trade_journal_review`,
+`account_reconciliation` and `historical_chart`. They provide analysis instructions;
+they neither fetch data automatically nor change account state. Use the
+[visual prompt library](EXAMPLE_PROMPTS.md) for sector-wise donuts, investment-wise
+pies, stock-allocation views, positions/trade charts and report examples.
+Rendering and optional local file creation are client capabilities, not additional
+MCP tools exposed by this server. Sector enrichment is not built into the API
+adapter and must never be guessed.

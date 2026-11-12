@@ -26,7 +26,7 @@ The repository's synthetic tests, scanner and CI reduce accidental disclosure; t
 ## Reporting a vulnerability
 
 Use the repository's private **Security → Report a vulnerability** feature when available:
-https://github.com/malkarisreenivasulu/jainam-mcp/security/advisories/new
+https://github.com/malkarisreenivasulu/jainam-mcp-agent/security/advisories/new
 
 Do not disclose credentials in public issues. If a credential leaks, revoke/rotate it with Jainam immediately; deleting a Git commit is not enough. For a non-sensitive bug use the issue tracker with sanitized error codes.
 

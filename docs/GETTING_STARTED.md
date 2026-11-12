@@ -1,4 +1,4 @@
-# Set up Jainam MCP on your computer
+# Set up Jainam MCP Agent on your computer
 
 You do not need to be a programmer. Do each step in order. Never paste your API secret, session or authorization code into an AI conversation, GitHub issue or screenshot.
 
@@ -21,8 +21,8 @@ If `python` is not found on macOS/Linux, try `python3`. On Windows try `py -3`. 
 ## 2. Download the released source
 
 ```sh
-git clone --branch v0.1.0 https://github.com/malkarisreenivasulu/jainam-mcp.git
-cd jainam-mcp
+git clone --branch v0.1.1 https://github.com/malkarisreenivasulu/jainam-mcp-agent.git
+cd jainam-mcp-agent
 ```
 
 A detached-HEAD message from cloning a release tag is normal. You are using a fixed release rather than a moving development branch.

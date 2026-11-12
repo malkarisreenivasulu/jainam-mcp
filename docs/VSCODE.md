@@ -19,7 +19,7 @@ Example structure:
   "servers": {
     "jainam": {
       "type": "stdio",
-      "command": "/absolute/path/jainam-mcp/.venv/bin/python",
+      "command": "/absolute/path/jainam-mcp-agent/.venv/bin/python",
       "args": ["-m", "jainam_mcp", "serve"]
     }
   }

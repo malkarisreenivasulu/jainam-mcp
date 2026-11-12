@@ -3,8 +3,8 @@ requires = ["hatchling>=1.27,<2"]
 build-backend = "hatchling.build"
 
 [project]
-name = "jainam-mcp"
-version = "0.1.0"
+name = "jainam-mcp-agent"
+version = "0.1.1"
 description = "Local read-only MCP server for Jainam ProTrade Open API v2"
 readme = "README.md"
 requires-python = ">=3.11"
@@ -21,12 +21,13 @@ classifiers = ["Programming Language :: Python :: 3", "Programming Language :: P
 dev = ["pytest>=8,<10", "ruff>=0.12,<1", "build>=1.2,<2", "pip-audit>=2.9,<3"]
 
 [project.scripts]
+jainam-mcp-agent = "jainam_mcp.cli:main"
 jainam-mcp = "jainam_mcp.cli:main"
 
 [project.urls]
-Homepage = "https://github.com/malkarisreenivasulu/jainam-mcp"
-Documentation = "https://github.com/malkarisreenivasulu/jainam-mcp/tree/main/docs"
-Issues = "https://github.com/malkarisreenivasulu/jainam-mcp/issues"
+Homepage = "https://github.com/malkarisreenivasulu/jainam-mcp-agent"
+Documentation = "https://github.com/malkarisreenivasulu/jainam-mcp-agent/tree/main/docs"
+Issues = "https://github.com/malkarisreenivasulu/jainam-mcp-agent/issues"
 
 [tool.hatch.metadata]
 allow-direct-references = true

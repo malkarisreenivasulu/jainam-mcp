@@ -19,7 +19,7 @@ Example shape only; use your generated absolute Python path:
 {
   "mcpServers": {
     "jainam": {
-      "command": "/absolute/path/jainam-mcp/.venv/bin/python",
+      "command": "/absolute/path/jainam-mcp-agent/.venv/bin/python",
       "args": ["-m", "jainam_mcp", "serve"]
     }
   }

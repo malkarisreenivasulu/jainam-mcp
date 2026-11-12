@@ -12,6 +12,7 @@ from urllib.parse import urlsplit
 import requests
 from jainam_api import APIError, Client
 
+from jainam_mcp import __version__
 from jainam_mcp.config import Credentials
 
 BASE_URL = "https://protrade.jainam.in/"
@@ -109,7 +110,7 @@ class Service:
             "mode": "read_only",
             "credentials_configured": self.credentials is not None,
             "connection_tested": False,
-            "version": "0.1.0",
+            "version": __version__,
         }
 
     def _run(self, operation: Callable) -> dict:

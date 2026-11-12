@@ -100,3 +100,15 @@ def test_noninteractive_setup_refuses_unsafe_input(tmp_path, monkeypatch, capsys
     assert cli.main(["--config", str(tmp_path / "credentials.json"), "configure"]) == 1
     prompt.assert_not_called()
     assert "interactive terminal" in capsys.readouterr().err
+
+
+def test_public_name_and_legacy_entry_points_remain_compatible():
+    import tomllib
+    from pathlib import Path
+
+    project = tomllib.loads((Path(__file__).resolve().parents[1] / "pyproject.toml").read_text())["project"]
+    assert project["name"] == "jainam-mcp-agent"
+    assert project["scripts"]["jainam-mcp-agent"] == project["scripts"]["jainam-mcp"]
+    from jainam_mcp.config import default_path
+
+    assert default_path().parent.name == "jainam-mcp"

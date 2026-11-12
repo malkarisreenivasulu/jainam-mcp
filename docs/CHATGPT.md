@@ -10,7 +10,7 @@ ChatGPT does not launch the Claude/VS Code JSON configuration. OpenAI documents 
    ```sh
    tunnel-client init --sample sample_mcp_stdio_local --profile jainam \
      --tunnel-id YOUR_TUNNEL_ID \
-     --mcp-command "/absolute/path/jainam-mcp/.venv/bin/python -m jainam_mcp serve"
+     --mcp-command "/absolute/path/jainam-mcp-agent/.venv/bin/python -m jainam_mcp serve"
    tunnel-client doctor --profile jainam --explain
    tunnel-client run --profile jainam
    ```

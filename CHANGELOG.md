@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.1.1 — 2026-11-12
+
+- Rename the public project/package to Jainam MCP Agent (`jainam-mcp-agent`).
+- Preserve `jainam_mcp`, the `jainam-mcp` CLI and existing credential-file locations; add the new CLI alias.
+- Add a visual prompt library for sector-wise donuts, acquisition-cost pies, holdings dashboards, positions and trade analysis.
+- Expose five reusable, read-only analysis prompt templates through MCP.
+- Explain client-side chart rendering, sector-mapping requirements, data coverage and P&L calculation limits.
+
 ## 0.1.0 — 2026-11-12
 
 - Initial standalone stdio MCP server using the pinned Jainam ProTrade Python SDK.

@@ -6,6 +6,7 @@ from mcp.server.fastmcp import FastMCP
 from mcp.types import ToolAnnotations
 from pydantic import Field
 
+from jainam_mcp.prompts import register_prompts
 from jainam_mcp.service import Service
 
 READ_ONLY = ToolAnnotations(readOnlyHint=True, destructiveHint=False, idempotentHint=True, openWorldHint=True)
@@ -14,7 +15,7 @@ Exchange = Literal["NSE", "NFO", "CDS", "BSE", "BFO", "BCD", "MCX", "INDICES"]
 
 def create_server(service: Service) -> FastMCP:
     server = FastMCP(
-        "Jainam MCP",
+        "Jainam MCP Agent",
         instructions=(
             "Read-only Jainam ProTrade tools. "
             "Never request passwords, API secrets, auth codes or sessions in chat. "
@@ -85,4 +86,5 @@ def create_server(service: Service) -> FastMCP:
         """Read candles using Unix milliseconds and a broker-supported resolution, up to 31 days."""
         return service.historical(exchange, token, resolution, from_ms, to_ms)
 
+    register_prompts(server)
     return server
