@@ -195,4 +195,3 @@ A model can make arithmetic or classification errors. Compare totals with the so
 ## Reusable MCP prompt templates
 
 The server also exposes `holdings_dashboard`, `positions_review`, `trade_journal_review`, `account_reconciliation` and `historical_chart` through MCP's prompt capability. Clients that support prompt discovery can select these directly; other clients can use the text above. A prompt template does not run an API call or execute a trade by itself.
-
