@@ -1,0 +1,12 @@
+{
+  "mcpServers": {
+    "jainam": {
+      "command": "/absolute/path/jainam-mcp/.venv/bin/python",
+      "args": [
+        "-m",
+        "jainam_mcp",
+        "serve"
+      ]
+    }
+  }
+}

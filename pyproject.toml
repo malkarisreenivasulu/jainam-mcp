@@ -1,0 +1,48 @@
+[build-system]
+requires = ["hatchling>=1.27,<2"]
+build-backend = "hatchling.build"
+
+[project]
+name = "jainam-mcp"
+version = "0.1.0"
+description = "Local read-only MCP server for Jainam ProTrade Open API v2"
+readme = "README.md"
+requires-python = ">=3.11"
+license = "MIT"
+license-files = ["LICENSE"]
+authors = [{name = "Sreenivasulu Malkari"}]
+dependencies = [
+  "mcp>=1.30,<2",
+  "jainam-api-python @ git+https://github.com/malkarisreenivasulu/jainam-api-python.git@393d522623dfec875d7a39959c40c0fdd17ff082",
+]
+classifiers = ["Programming Language :: Python :: 3", "Programming Language :: Python :: 3 :: Only"]
+
+[project.optional-dependencies]
+dev = ["pytest>=8,<10", "ruff>=0.12,<1", "build>=1.2,<2", "pip-audit>=2.9,<3"]
+
+[project.scripts]
+jainam-mcp = "jainam_mcp.cli:main"
+
+[project.urls]
+Homepage = "https://github.com/malkarisreenivasulu/jainam-mcp"
+Documentation = "https://github.com/malkarisreenivasulu/jainam-mcp/tree/main/docs"
+Issues = "https://github.com/malkarisreenivasulu/jainam-mcp/issues"
+
+[tool.hatch.metadata]
+allow-direct-references = true
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/jainam_mcp"]
+
+[tool.hatch.build.targets.sdist]
+include = ["/src", "/tests", "/docs", "/examples", "/scripts", "/.github", "/pyproject.toml", "/README.md", "/LICENSE", "/SECURITY.md", "/CONTRIBUTING.md", "/CHANGELOG.md", "/.gitignore"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 110
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B"]
